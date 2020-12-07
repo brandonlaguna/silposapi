@@ -1,0 +1,85 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>Copalcol Report</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+</head>
+
+<body style="background-color: #e2e7ea; height: 1200px;">
+    <div style="width: 70%; margin-left:15%; padding: 8px;">
+        <div style="width: 50px; height: 50px; background-color: white; border-radius: 25px;  display: table;
+            margin: 0 auto;">
+            <img src="http://restapi.psi-web.co/public/ic_launcher.png" alt=""
+                style="width: 50px; height: 50px; display: block; margin-left: auto; margin-right: auto;">
+        </div>
+    </div>
+    <div style="width: 100%; height: 30px; padding: 8px; text-align: center;">
+        <h2 style="font-family: 'Work Sans', sans-serif; font-weight: 300; color:':#6f6e6e';">Hola <strong>{{businessName}},</strong></h2>
+    </div>
+    <div style="width: 100%; height: 30px; text-align: center;">
+        <h2 style="font-family: 'Work Sans', sans-serif; font-weight: 300; color:':#6f6e6e';">Se ha registrado un nuevo reporte de visita
+            desde la aplicacion CopalcolApp.
+        </h2>
+    </div>
+    <div style="width: 100%; height: 30px; margin-top: 20px; color:#6f6e6e;">
+        <div style="width:80%; height: auto; background-color: #f7f7f7; margin-left: 10%;-webkit-box-shadow: 0px 0px 26px -3px rgba(176,176,176,1);
+        -moz-box-shadow: 0px 0px 26px -3px rgba(176,176,176,1);
+        box-shadow: 0px 0px 26px -3px rgba(176,176,176,1); padding: 15px; text-align: center;">
+            <img src="http://restapi.psi-web.co/public/mail-desk.png" alt=""
+                style="width: 100px; height: 100px; display: block; margin-left: auto; margin-right: auto;">
+                <h3 style="font-family: 'Work Sans', sans-serif; font-weight: 300; color:':#6f6e6e';">El usuario {{userName}} ha registrado una nueva visita para el asociado <strong>{{asociadoName}}</strong> el dia {{dateVisita}} </h3>
+                <h4 style="font-family: 'Work Sans', sans-serif; font-weight: 300; text-align: left; color:':#6f6e6e';"><strong>Tipo de visita</strong>: {{tipoVisita}} </h4>
+                <h4 style="font-family: 'Work Sans', sans-serif; font-weight: 300; text-align: left; color:':#6f6e6e';"><strong>Detalle</strong>: {{detalleVisita}} </h4>
+                <h4 style="font-family: 'Work Sans', sans-serif; font-weight: 300; text-align: left; color:':#6f6e6e';"><strong>Recomendaciones</strong>: {{recomendacionVisita}} </h4>
+                <h4 style="font-family: 'Work Sans', sans-serif; font-weight: 300; text-align: left; color:':#6f6e6e';"><strong>Diagnosticos</strong>: {{diagnostcoVisita}} </h4>
+
+                <h3 style="font-family: 'Work Sans', sans-serif; font-weight: 300;">{{artilceCount}} articulo(s) facturados a esta visita </h3>
+                <table style="width: 100%;">
+                    <tr>
+                      <th>Articulo</th>
+                      <th>Cantidad</th>
+                      <th>P/U</th>
+                      <th>IVA</th>
+                      <th>Total</th>
+                    </tr>
+                    {{# each listArticles}}
+                    <tr>
+                      <td>{{name}}</td>
+                      <td>{{count}}</td>
+                      <td>{{price}}</td>
+                      <td>{{imp}}</td>
+                      <td>{{total}}</td>
+                    </tr> 
+                    {{/each}}   
+                  </table>
+                  
+        </div>
+    </div>
+</body>
+
+</html>
