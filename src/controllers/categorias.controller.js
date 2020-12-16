@@ -1,4 +1,4 @@
-const mysql = require("../config/database").mysql_pool;
+var mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 
 const getCategorias = async (req, res) => {
@@ -23,12 +23,21 @@ const getCategorias = async (req, res) => {
               codeerror:401,
           })
           } else {
-            mysql.getConnection(function (err, connection) {
+            
+            var connection = mysql.createConnection({
+              host: "localhost",
+              user: req.headers['dbu'],
+              password: req.headers['dbp'],
+              database: req.headers['dbd'],
+            });
+        
+            connection.connect();
+
                 connection.query('SELECT * FROM categoria LIMIT 15', function(err, rows, fields) {
                     if (err) throw err;
                     res.status(200).json({data:rows,status:true});
                   });
-            });
+            
           }
         })
 

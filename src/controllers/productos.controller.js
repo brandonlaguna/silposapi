@@ -3,15 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const getProducts = async (req, res) => {
   try {
-    
-    var connection = mysql.createConnection({
-      host: "localhost",
-      user: req.body.dbu,
-      password: req.body.dbp,
-      database:req.body.dbd,
-    });
-
-    connection.connect();
+  
 
     var token = req.headers["authorization"];
     if (!token) {
@@ -33,6 +25,15 @@ const getProducts = async (req, res) => {
           codeerror: 401,
         });
       } else {
+
+        var connection = mysql.createConnection({
+          host: "localhost",
+          user: req.headers['dbu'],
+          password: req.headers['dbp'],
+          database: req.headers['dbd'],
+        });
+    
+        connection.connect();
 
           connection.query(
             "SELECT * FROM productos",
