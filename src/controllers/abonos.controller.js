@@ -16,7 +16,7 @@ const getAbonos = async (req, res) => {
             res.status(401).send({
               error: 'Token inválido'
             })
-          } else {
+          } else {  
             mysql.getConnection(function (err, connection) {
                 connection.query('SELECT * FROM abonos', function(err, rows, fields) {
                     if (err) throw err;
@@ -28,6 +28,10 @@ const getAbonos = async (req, res) => {
     } catch (error) {
         res.status(200).json(error);
     }
+}
+
+const test =async (req,res)=>{
+  
 }
 
 module.exports = {
