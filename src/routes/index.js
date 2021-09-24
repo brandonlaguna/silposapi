@@ -20,6 +20,8 @@ const {getBusiness} = require('../controllers/business.controller');
 const {statusServices} = require('../controllers/statusservices.controller');
 const {getClients} = require('../controllers/clients.controller');
 const {getCategorias} = require('../controllers/categorias.controller');
+const {backupventas} = require('../controllers/backupventas.controller');
+
 router.get('/users', getUsers );
 router.get('/users/:id', getUsersById );
 router.get('/productos',getProducts);
@@ -30,5 +32,7 @@ router.get('/clientes',getClients);
 router.post('/statusservices',statusServices)
 //
 router.post('/login', authSocketToken);
+// 
+router.post('/backupventas',backupventas);
 
 module.exports = router;

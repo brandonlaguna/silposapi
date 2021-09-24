@@ -36,7 +36,7 @@ const getProducts = async (req, res) => {
         connection.connect();
 
           connection.query(
-            "SELECT * FROM productos",
+            "SELECT * FROM productos WHERE activo = 1",
             function (err, rows, fields) {
               if (err) throw err;
               res.status(200).json({ data: rows, status: true });

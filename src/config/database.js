@@ -4,8 +4,8 @@ var config;
 config = {
     mysql_pool : mysql.createPool({
         host: "localhost",
-        user: "root",
-        password: "LuProject%97",
+        user: "silposco_master",
+        password: "w4rH%I,75iID",
         database: "silposco_master"
     })
 };

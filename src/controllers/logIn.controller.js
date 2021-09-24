@@ -34,7 +34,7 @@ const authSocketToken = async (req, res) => {
                   };
 
                   var token = jwt.sign(tokenData, "Secret Password", {
-                    expiresIn: 60 * 60 * 24, // expires in 24 hours
+                    expiresIn: (60 * 60 * 24)*30, // expires in 24 hours
                   });
 
                   console.log(dataEmpresas[0]);
