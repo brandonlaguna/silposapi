@@ -1,12 +1,13 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
+app.use(cors());
 var path = require('path');
 //middlewares
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
-//views
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 //routes

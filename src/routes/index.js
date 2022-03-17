@@ -16,7 +16,7 @@ const upload = multer({storage: storage})
 const {getUsers,getUsersById} =require('../controllers/usuario.controller');
 const {getProducts} = require('../controllers/productos.controller');
 const {authSocketToken} =  require('../controllers/logIn.controller');
-const {getBusiness} = require('../controllers/business.controller');
+const {getBusiness, getTipoConsultas} = require('../controllers/business.controller');
 const {statusServices} = require('../controllers/statusservices.controller');
 const {getClients} = require('../controllers/clients.controller');
 const {getCategorias} = require('../controllers/categorias.controller');
@@ -28,6 +28,7 @@ router.get('/productos',getProducts);
 router.get('/categorias',getCategorias);
 router.get('/empresa',getBusiness);
 router.get('/clientes',getClients);
+router.get('/tipos_consultas',getTipoConsultas);
 
 router.post('/statusservices',statusServices)
 //
