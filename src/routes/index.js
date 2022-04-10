@@ -21,6 +21,7 @@ const {statusServices} = require('../controllers/statusservices.controller');
 const {getClients} = require('../controllers/clients.controller');
 const {getCategorias} = require('../controllers/categorias.controller');
 const {backupventas} = require('../controllers/backupventas.controller');
+const {getTiposTransacciones} = require("../controllers/tiposTransacciones.controller");
 
 router.get('/users', getUsers );
 router.get('/users/:id', getUsersById );
@@ -29,11 +30,13 @@ router.get('/categorias',getCategorias);
 router.get('/empresa',getBusiness);
 router.get('/clientes',getClients);
 router.get('/tipos_consultas',getTipoConsultas);
+router.get('/tipos_transacciones', getTiposTransacciones);
 
 router.post('/statusservices',statusServices)
 //
 router.post('/login', authSocketToken);
-// 
+//
 router.post('/backupventas',backupventas);
+
 
 module.exports = router;
