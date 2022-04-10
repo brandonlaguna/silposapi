@@ -22,6 +22,7 @@ const {getClients} = require('../controllers/clients.controller');
 const {getCategorias} = require('../controllers/categorias.controller');
 const {backupventas} = require('../controllers/backupventas.controller');
 const {getTiposTransacciones} = require("../controllers/tiposTransacciones.controller");
+const { getMetodosPago } = require("../controllers/metodosPago.controller");
 
 router.get('/users', getUsers );
 router.get('/users/:id', getUsersById );
@@ -31,6 +32,7 @@ router.get('/empresa',getBusiness);
 router.get('/clientes',getClients);
 router.get('/tipos_consultas',getTipoConsultas);
 router.get('/tipos_transacciones', getTiposTransacciones);
+router.get('/metodos_pago', getMetodosPago);
 
 router.post('/statusservices',statusServices)
 //
