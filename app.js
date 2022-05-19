@@ -1,7 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+}));
 var path = require('path');
 //middlewares
 
@@ -13,5 +16,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 //routes
 app.use(require('./src/routes/index'));
 
-app.listen(3000);
-console.log('Server on port 3000');
+app.listen(3001);
+console.log('Server on port 3001');
