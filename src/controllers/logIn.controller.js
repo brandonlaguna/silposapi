@@ -26,7 +26,6 @@ const authSocketToken = async (req, res) => {
             mysql.getConnection(function (err, connection) {
               connection.query("SELECT * FROM company_user cu INNER JOIN empresas e ON cu.company_id = e.id WHERE cu.user_id = ?",[result[0].id],function (err, business, fields) {
                 dataEmpresas.push(business);
-                  
                   auth = true;
                   var tokenData = {
                     username: username,
@@ -59,18 +58,34 @@ const authSocketToken = async (req, res) => {
         }
       );
     });
-
-    // if (!auth) {
-    //     res.status(401).send({
-    //         error: 'usuario o contraseña inválidos'
-    //     })
-    //     return
-    // }
   } catch (e) {
     res.status(200).json({ status: false, error: e });
   }
 };
 
+const checkAuthStates = async (req, res) => {
+  var token = req.body['accessToken'];
+  if(!token){
+    res.status(401).send({
+      error: "Es necesario el token de autenticación"
+    })
+    return
+  }
+  token = token.replace('Bearer ', '')
+  jwt.verify(token, 'Secret Password', function(err, user) {
+    if (err) {
+      res.status(401).send({data:{
+        message: "Usuario inválido"
+      },status:false})
+    } else {
+      res.status(200).json({data:{
+        message: "Usuario válido"
+      },status:true});
+    }
+  })
+};
+
 module.exports = {
   authSocketToken,
+  checkAuthStates
 };

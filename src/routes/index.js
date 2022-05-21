@@ -15,9 +15,9 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 const {getUsers,getUsersById} =require('../controllers/usuario.controller');
 const {getProducts} = require('../controllers/productos.controller');
-const {authSocketToken} =  require('../controllers/logIn.controller');
+const { authSocketToken, checkAuthStates } =  require('../controllers/logIn.controller');
 const {getBusiness, getTipoConsultas} = require('../controllers/business.controller');
-const {statusServices} = require('../controllers/statusservices.controller');
+const { statusServices } = require('../controllers/statusservices.controller');
 const {getClients} = require('../controllers/clients.controller');
 const {getCategorias} = require('../controllers/categorias.controller');
 const {backupventas} = require('../controllers/backupventas.controller');
@@ -34,9 +34,10 @@ router.get('/tipos_consultas',getTipoConsultas);
 router.get('/tipos_transacciones', getTiposTransacciones);
 router.get('/metodos_pago', getMetodosPago);
 
-router.post('/statusservices',statusServices)
+router.post('/statusservices', statusServices)
 //
 router.post('/login', authSocketToken);
+router.post('/checkAuthStatus', checkAuthStates)
 //
 router.post('/backupventas',backupventas);
 
