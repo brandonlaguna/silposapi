@@ -12,24 +12,34 @@ const storage = multer.diskStorage({
   }
 })
 
-const upload = multer({storage: storage})
-const {getUsers,getUsersById} =require('../controllers/usuario.controller');
-const {getProducts} = require('../controllers/productos.controller');
-const { authSocketToken, checkAuthStates } =  require('../controllers/logIn.controller');
-const {getBusiness, getTipoConsultas} = require('../controllers/business.controller');
+const upload = multer({storage: storage});
+const { verifyJWTToken } = require("../controllers/auth.controller");
+const {
+  getUsers,
+  getUsersById,
+} =require('../controllers/usuario.controller');
+const { getProducts } = require('../controllers/productos.controller');
+const {
+  authSocketToken,
+  checkAuthStates,
+} =  require('../controllers/logIn.controller');
+const { getBusiness, getTipoConsultas } = require('../controllers/business.controller');
 const { statusServices } = require('../controllers/statusservices.controller');
-const {getClients} = require('../controllers/clients.controller');
-const {getCategorias} = require('../controllers/categorias.controller');
-const {backupventas} = require('../controllers/backupventas.controller');
-const {getTiposTransacciones} = require("../controllers/tiposTransacciones.controller");
+const { getClients, createClients } = require('../controllers/clients.controller');
+const { getCategorias } = require('../controllers/categorias.controller');
+const { backupventas } = require('../controllers/backupventas.controller');
+const { getTiposTransacciones } = require("../controllers/tiposTransacciones.controller");
 const { getMetodosPago } = require("../controllers/metodosPago.controller");
+const {
+  getPrinters,
+  createPrinter,
+} = require("../controllers/printers.controller");
 
 router.get('/users', getUsers );
 router.get('/users/:id', getUsersById );
 router.get('/productos',getProducts);
 router.get('/categorias',getCategorias);
 router.get('/empresa',getBusiness);
-router.get('/clientes',getClients);
 router.get('/tipos_consultas',getTipoConsultas);
 router.get('/tipos_transacciones', getTiposTransacciones);
 router.get('/metodos_pago', getMetodosPago);
@@ -40,6 +50,11 @@ router.post('/login', authSocketToken);
 router.post('/checkAuthStatus', checkAuthStates)
 //
 router.post('/backupventas',backupventas);
-
+//clients
+router.get('/clientes', verifyJWTToken, getClients);
+router.post('/clients/store', verifyJWTToken, createClients);
+// printers
+router.get('/printers', verifyJWTToken, getPrinters);
+router.post('/printers/store', verifyJWTToken, createPrinter);
 
 module.exports = router;

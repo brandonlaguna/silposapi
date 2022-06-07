@@ -1,49 +1,45 @@
-const jwt = require("jsonwebtoken");
 var mysql = require("mysql");
+const connectionParams = require("../functions/connectionParams");
+const Clients = require('../models/clients.model');
 
 const getClients = async (req, res) => {
     try {
-        var token = req.headers['authorization']
-        if(!token){
-            res.status(401).send({
-                error: "Es necesario el token de autenticación",
-                status:false,
-                codeerror:401,
-            })
-            return
-        }
-        token = token.replace('Bearer ', '')
-      
-        jwt.verify(token, 'Secret Password', function(err, user) {
-          if (err) {
-            res.status(401).send({
-                error: 'Token inválido',
-                status:false,
-                codeerror:401,
-            })
-          } else {
+      var connection = mysql.createConnection(connectionParams(req.headers));
+      connection.connect();
+      Clients.findAll(connection, function(err, employee) {
+        if (err)
+          res.send(err);
 
-            var connection = mysql.createConnection({
-                host: "localhost",
-                user: req.headers['dbu'],
-                password: req.headers['dbp'],
-                database: req.headers['dbd'],
-              });
-          
-              connection.connect();
-                connection.query('SELECT * FROM clientes', function(err, rows, fields) {
-                    if (err) throw err;
-                    res.status(200).json({data:rows,status:true,codeerror:false});
-                  });
-            
-          }
-        })
+        res.send(employee);
+      });
     } catch (error) {
-        res.status(200).json({data:false,status:false,codeerror:error});
+        res.status(200).json({data:false,status:false,code_error:error});
     }
 };
 
+const createClients = async (req, res) => {
+  try {
+    var connection = mysql.createConnection(connectionParams(req.headers));
+    connection.connect();
+    const newClient = new Clients(req.body);
 
+    if( req.body.constructor === Object && Object.keys(req.body).length === 0 ){
+      res.status(400).send({ status: false, message: 'Por favor ingresar los datos solicitados' });
+    } else {
+
+      Clients.create(connection, newClient, function(err, client) {
+        if (err)
+          res.send(err);
+
+        res.json({ status: true, message: "cliente creado correctamente!", data: client });
+
+      });
+    }
+  } catch (error) {
+    res.status(200).json({ data: false, status: false, code_error: error });
+  }
+};
 module.exports ={
-    getClients
+    getClients,
+    createClients
 }

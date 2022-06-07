@@ -1,23 +1,27 @@
 const jwt = require('jsonwebtoken');
 
-const jwtAuth =(restoken)=>{
-    try {
-      
-        token = restoken.replace('Bearer ', '')
-        jwt.verify(token, 'Secret Password', function(err, user) {
-          if (err) {
-            return false;
-          } else {
-            return true;
-          }
-        })
-
-
-    } catch (error) {
-        return false;
+async function verifyJWTToken(request, response, next) {
+  var token = request.headers['authorization'];
+  if(!token){
+    response.status(401).send({
+        error: "Es necesario el token de autenticación",
+        status:false,
+        codeerror:401,
+    })
+    return
+  }
+  token = token.replace('Bearer ', '')
+  jwt.verify(token, 'Secret Password', function(err, user) {
+    if (err) {
+      response.status(401).send({
+        error: 'Token inválido',
+        status:false,
+        codeerror:401,
+      })
     }
+  next();
+  });
 }
-
-module.exports = {
-    jwtAuth,
+module.exports ={
+  verifyJWTToken,
 }
