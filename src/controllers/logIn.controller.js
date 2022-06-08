@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const mysql = require("../config/database").mysql_pool;
 
 const authSocketToken = async (req, res) => {
-  // try {
+  try {
     var username = req.body.user;
     var password = req.body.password;
 
@@ -58,9 +58,9 @@ const authSocketToken = async (req, res) => {
         }
       );
     });
-  // } catch (e) {
-    // res.status(200).json({ status: false, error: e });
-  // }
+  } catch (e) {
+    res.status(200).json({ status: false, error: e });
+  }
 };
 
 const checkAuthStates = async (req, res) => {

@@ -10,10 +10,11 @@ const getClients = async (req, res) => {
         if (err)
           res.send(err);
 
-        res.send(employee);
+        //res.send(employee);
+        res.status(200).json({data:employee,status:true,codeerror:false});
       });
     } catch (error) {
-        res.status(200).json({data:false,status:false,code_error:error});
+        res.status(200).json({data:false,status:false,codeerror:error});
     }
 };
 
@@ -36,7 +37,7 @@ const createClients = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(200).json({ data: false, status: false, code_error: error });
+    res.status(200).json({ data: false, status: false, codeerror: error });
   }
 };
 module.exports ={
