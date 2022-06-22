@@ -33,7 +33,7 @@ const getCategorias = async (req, res) => {
         
             connection.connect();
 
-                connection.query('SELECT * FROM categoria LIMIT 15', function(err, rows, fields) {
+                connection.query('SELECT * FROM categoria', function(err, rows, fields) {
                     if (err) throw err;
                     res.status(200).json({data:rows,status:true});
                   });
