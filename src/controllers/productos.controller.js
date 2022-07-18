@@ -32,7 +32,7 @@ const getProducts = async (req, res) => {
           password: req.headers['dbp'],
           database: req.headers['dbd'],
         });
-    
+
         connection.connect();
 
           connection.query(

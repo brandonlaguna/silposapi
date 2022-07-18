@@ -35,6 +35,8 @@ const {
   createPrinter,
 } = require("../controllers/printers.controller");
 
+const { getAllUsers } = require("../controllers/users.controller");
+
 router.get('/users', getUsers );
 router.get('/users/:id', getUsersById );
 router.get('/productos',getProducts);
@@ -56,5 +58,7 @@ router.post('/clients/store', verifyJWTToken, createClients);
 // printers
 router.get('/printers', verifyJWTToken, getPrinters);
 router.post('/printers/store', verifyJWTToken, createPrinter);
+//users
+router.get('/allUsers', verifyJWTToken, getAllUsers);
 
 module.exports = router;

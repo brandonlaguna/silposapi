@@ -4,7 +4,7 @@ const mysql = require('../config/database').mysql_pool;
 const statusServices = (req,res) => {
     try {
         var token = req.headers['authorization']
-        var businessId = req.headers['bsnid'];
+        var businessId = req.headers['Company'];
         if(!token){
             res.status(401).send({
               error: "Es necesario el token de autenticación",
