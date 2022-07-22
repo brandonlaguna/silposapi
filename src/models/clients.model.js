@@ -56,7 +56,7 @@ class Clients {
   }
 
   static findAll(dbConn, result) {
-    dbConn.query("Select * from clientes", function (err, res) {
+    dbConn.query("Select * from clientes WHERE activo = 1", function (err, res) {
       if (err) {
         result(null, err);
       }
