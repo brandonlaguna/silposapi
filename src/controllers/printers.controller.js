@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 var mysql = require("mysql");
-const connectionParams = require("../functions/connectionParams");
+const { connectionParams } = require("../functions/connectionParams");
 const Printers = require('../models/printers.model');
 
 const getPrinters = async (req, res) => {

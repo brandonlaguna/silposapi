@@ -1,5 +1,5 @@
 var mysql = require("mysql");
-const connectionParams = require("../functions/connectionParams");
+const { connectionParams } = require("../functions/connectionParams");
 const Clients = require('../models/clients.model');
 
 const getClients = async (req, res) => {
