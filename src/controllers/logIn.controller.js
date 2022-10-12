@@ -10,7 +10,7 @@ const authSocketToken = async (req, res) => {
 
     mysql.getConnection(function (err, connection) {
       connection.query(
-        'SELECT * FROM usuarios U INNER JOIN company_user CU ON U.id = CU.user_id WHERE email = ? AND pass = ? AND activo = "1" ',
+        'SELECT u.*, cu.activo, cu.permiso, cu.rol FROM company_user cu, usuarios u WHERE u.email = ? AND u.pass = ? AND cu.user_id = u.id AND cu.activo = 1',
         [username, password],
         function (err, result, fields) {
           if (err) {
@@ -24,7 +24,7 @@ const authSocketToken = async (req, res) => {
 
             console.log(result[0].id);
             mysql.getConnection(function (err, connection) {
-              connection.query("SELECT * FROM company_user cu INNER JOIN empresas e ON cu.company_id = e.id WHERE cu.user_id = ?",[result[0].id],function (err, business, fields) {
+              connection.query("SELECT c.* FROM empresa c, company_user cu WHERE cu.user_id = ? AND cu.company_id = c.id LIMIT 1",[result[0].id],function (err, business, fields) {
                 dataEmpresas.push(business);
                   auth = true;
                   var tokenData = {
