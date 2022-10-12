@@ -10,7 +10,7 @@ const authSocketToken = async (req, res) => {
 
     mysql.getConnection(function (err, connection) {
       connection.query(
-        'SELECT * FROM usuarios WHERE email = ? AND pass = ? AND activo = "1" ',
+        'SELECT * FROM usuarios U INNER JOIN company_user CU ON U.id = CU.user_id WHERE email = ? AND pass = ? AND activo = "1" ',
         [username, password],
         function (err, result, fields) {
           if (err) {
