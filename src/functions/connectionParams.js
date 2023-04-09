@@ -2,7 +2,7 @@ function connectionParams(data) {
   return {
     host: "localhost",
     user: data['dbu'],
-    password: data['dbp'],
+    password: data['dbp'] ? data['dbp'] : "",
     database: data['dbd'],
   }
 }

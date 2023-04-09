@@ -2,6 +2,7 @@
 
 class Printers {
   constructor(printer) {
+    this.id   = printer.id;
     this.nombre   = printer.nombre;
     this.tipo     = printer.tipo;
     this.ruta     = printer.ruta;
@@ -33,7 +34,7 @@ class Printers {
   }
 
   static findAll(dbConn, result) {
-    dbConn.query("Select * from impresoras", function (err, res) {
+    dbConn.query("SELECT * FROM impresoras WHERE estado = 1", function (err, res) {
       if (err) {
         result(null, err);
       }
@@ -44,9 +45,8 @@ class Printers {
   }
 
   static update(dbConn, id, printer, result) {
-    dbConn.query("UPDATE impresoras SET WHERE id = ?", [id], function (err, res) {
+    dbConn.query("UPDATE impresoras SET ? WHERE id = ?", [printer, id], function (err, res) {
       if (err) {
-        console.log("error: ", err);
         result(null, err);
       } else {
         result(null, res);
@@ -54,8 +54,8 @@ class Printers {
     });
   }
 
-  static delete(dbConn, id, result) {
-    dbConn.query("DELETE FROM impresoras WHERE id = ?", [id], function (err, res) {
+  static delete(dbConn, producto, result) {
+    dbConn.query("UPDATE impresoras SET estado = 0 WHERE id = ?", [producto.id], function (err, res) {
       if (err) {
         console.log("error: ", err);
         result(null, err);
