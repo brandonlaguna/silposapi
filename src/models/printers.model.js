@@ -3,11 +3,12 @@
 class Printers {
   constructor(printer) {
     this.id   = printer.id;
-    this.nombre   = printer.nombre;
-    this.tipo     = printer.tipo;
-    this.ruta     = printer.ruta;
-    this.formato  = JSON.stringify(printer.formato);
-    this.estado   = printer.estado
+    this.nombre           = printer.nombre;
+    this.tipo             = printer.tipo;
+    this.ruta             = printer.ruta;
+    this.formato          = JSON.stringify(printer.formato);
+    this.estado           = printer.estado;
+    this.tipo_formato     = printer.tipo_formato;
   }
 
   static create(dbConn, newPrinter, result) {
